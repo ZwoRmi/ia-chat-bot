@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "startdev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nassimreb/ia-chat-bot.git"
   },
-  "author": "",
+  "author": "Dany Patient, Nassim Rebouh & Lucas Lemaire",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/nassimreb/ia-chat-bot/issues"
@@ -18,5 +21,8 @@
   "homepage": "https://github.com/nassimreb/ia-chat-bot#readme",
   "dependencies": {
     "slackbots": "^1.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
