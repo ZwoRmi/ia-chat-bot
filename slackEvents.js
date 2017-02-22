@@ -22,20 +22,20 @@ class SlackEvents {
       if(data.type === 'message' && typeof data.bot_id === 'undefined') {
         data.text = data.text.trim();
         if (data.text.substring(0, 15) === 'expectedAnswer:') {
-          SmartAgent.addContext(that.lastRequest, data.text.substring(15), 1);
+          SmartAgent.addSentenceNode(data.text.substring(15).trim(), that.lastRequest || '', 1);
         }
         else {
           that.lastRequest = data.text;
-          let response = SmartAgent.getResponse(data.text);
+          let response = SmartAgent.getResponse(data.text, that.lastResponse || '');
           that.lastResponse = response;
           that.bot.postMessage(data.channel, response, undefined);
         }
       }
       if(data.type === 'reaction_added' && typeof data.reaction !== 'undefined') {
         if(data.reaction === '-1') {
-          SmartAgent.decreasePerformance(that.lastRequest, that.lastResponse);
+          SmartAgent.decreasePerformance(that.lastResponse);
         } else if(data.reaction === '+1') {
-          SmartAgent.increasePerformance(that.lastRequest, that.lastResponse);
+          SmartAgent.increasePerformance(that.lastResponse);
         }
       }
     });
