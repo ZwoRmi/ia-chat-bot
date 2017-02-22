@@ -1,6 +1,7 @@
 'use strict';
 
 const NodeSentence = require('./nodeSentence');
+const fs = require('fs');
 
 function shuffle(a) {
   let j, x, i;
@@ -18,8 +19,10 @@ function removePunctuation(sentence) {
 
 class SmartAgent {
   constructor() {
-    this.nodeList = [];
-    this.nodeList.push(new NodeSentence('', null, -1));
+    this.nodeList = JSON.parse(fs.readFileSync('./storage.txt', 'utf8'));
+    if (this.nodeList.length<1) {
+      this.nodeList.push(new NodeSentence('', null, -1));
+    }
   }
 
   getNodeSentence(sentence) {
@@ -37,22 +40,29 @@ class SmartAgent {
   addSentenceNode(sentence, parentSentence, performance) {
     const parentNode = this.getNodeSentence(parentSentence);
     const existingNode = this.getNodeSentence(sentence);
+    let result = undefined;
     if(existingNode) {
-      existingNode.addParent(parentNode);
-      parentNode.addChild(existingNode);
-      return existingNode;
+      parentNode.children.push(existingNode);
+      result = existingNode;
     } else if (parentNode) {
-      const newNodeSentence = new NodeSentence(sentence, parentNode, performance);
-      parentNode.addChild(newNodeSentence);
+      const newNodeSentence = new NodeSentence(sentence, performance);
+      parentNode.children.push(newNodeSentence);
       this.nodeList.push(newNodeSentence);
-      return newNodeSentence;
+      result = newNodeSentence;
     }
+    if(typeof result!== 'undefined') {
+      this.saveData();
+    }
+  }
+
+  saveData() {
+    fs.writeFile('./storage.txt', JSON.stringify(this.nodeList));
   }
 
   getResponse(sentence, parentSentence) {
     let sentenceNode = this.getNodeSentence(sentence);
     if(typeof sentenceNode === 'undefined') {
-      sentenceNode = this.addSentenceNode(sentence, parentSentence);
+      sentenceNode = this.addSentenceNode(sentence, parentSentence || '');
     }
     return this.getBestResponse(sentenceNode);
   }
@@ -60,7 +70,7 @@ class SmartAgent {
   getBestResponse(sentenceNode) {
     let response = 'Je ne sais pas quoi répondre';
     let maxPerf = -1;
-    if (sentenceNode.hasChild()) {
+    if (sentenceNode && sentenceNode.children.length>0) {
       shuffle(sentenceNode.children);
       sentenceNode.children.forEach(function(childSentenceNode) {
         if (childSentenceNode.performance > maxPerf) {
