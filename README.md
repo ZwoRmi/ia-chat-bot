@@ -2,10 +2,24 @@
 
 ChatBot for slack developed for INSTA.
 
-#Running the project
+## Installation
+
+1. Clone this project
+2. Add a chatbot to your channel and get you api token
+3. Add your slack api token to your environment variables
+4. run `npm install --production`
+
+## Running the project
 
 Run `npm start`
 
-#Dependencies
+##Usage
 
-[slackbots](https://www.npmjs.com/package/slackbots)
+Simply chat with the chatbot, he will learn from what you say to him.
+When he gives you a good/bad message, add a reaction :+1:/:-1: on this answer.
+If you want to give him a new response for a message, tell him : `expectedAnswer: <The message you want him to remember>`
+
+## Dependencies
+
+- [slackbots](https://www.npmjs.com/package/slackbots) To interact with [slack](https://slack.com/)
+- [CircularJson](https://www.npmjs.com/package/circular-json) To store data in a file when there are circular references
