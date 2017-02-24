@@ -6,7 +6,7 @@ ChatBot for slack developed for INSTA.
 
 1. Clone this project
 2. Add a chatbot to your slack team and get your api token
-3. Add your slack api token to your environment variables
+3. Create an environment variable named `SLACK_TOKEN` with the value of the slack api token
 4. run `npm install --production`
 
 ## Running the project
