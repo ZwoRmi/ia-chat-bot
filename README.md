@@ -24,3 +24,9 @@ If you want to give him a new response for a message, tell him : `expectedAnswer
 
 - [slackbots](https://www.npmjs.com/package/slackbots) To interact with [slack](https://slack.com/)
 - [CircularJson](https://www.npmjs.com/package/circular-json) To store data in a file when there are circular references
+
+## Contributors
+- Nassim Rebouh
+- Patrick Bukowski
+- Dany Patient
+- Lucas Lemaire
