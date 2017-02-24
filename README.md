@@ -5,7 +5,7 @@ ChatBot for slack developed for INSTA.
 ## Installation
 
 1. Clone this project
-2. Add a chatbot to your channel and get you api token
+2. Add a chatbot to your slack team and get your api token
 3. Add your slack api token to your environment variables
 4. run `npm install --production`
 
