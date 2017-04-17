@@ -1,4 +1,4 @@
-#ia-chat-bot
+# ia-chat-bot
 
 ChatBot for slack developed for INSTA.
 
@@ -13,7 +13,7 @@ ChatBot for slack developed for INSTA.
 
 Run `npm start`
 
-##Usage
+## Usage
 
 Simply chat with the chatbot, he will learn from what you say to him. 
 When he gives you a good/bad message, add a reaction :+1:/:-1: on this response.
